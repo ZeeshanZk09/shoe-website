@@ -2,20 +2,150 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  outline: none;
+  /* overflow-x: hidden; */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply text-gray-900 bg-gray-300 transition-all duration-300 overflow-x-hidden;
+}
+
+::selection {
+  background-color: #c96f5b;
+}
+
+.dark body {
+  @apply text-gray-100 bg-gray-700 overflow-x-hidden;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heart {
+  animation: pulse 1.5s infinite;
+}
+
+@layer components {
+  .loginBtn {
+    @apply relative w-[120px] h-[40px] bg-black flex items-center text-white flex-col justify-center border-none px-3 gap-3 rounded-lg cursor-pointer 
+    before:content-[''] before:absolute before:inset-0 before:left-[-4px] before:top-[-1px] before:m-auto before:w-[128px] before:h-[48px] before:rounded-[10px] before:bg-gradient-to-r before:from-[#d94125] before:to-[#c96f5b] before:z-[-10] before:pointer-events-none before:transition-transform before:duration-[600ms] before:ease-[cubic-bezier(0.175,0.885,0.32,1.275)]
+    after:content-[''] after:z-[-1] after:absolute after:inset-0 after:bg-gradient-to-r after:from-[#d94125] after:to-[#c96f5b] after:scale-95 after:blur-[20px] after:transition-all after:duration-300
+    hover:after:blur-[30px] hover:before:rotate-[-180deg] active:before:scale-75;
+  }
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:-webkit-autofill {
+  background-color: transparent !important; /* ✅ Background transparent */
+  color: black !important; /* ✅ Text color fix */
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: white !important; /* ✅ White background */
+  color: black !important; /* ✅ Text color */
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; /* ✅ Forcefully remove autofill color */
+  transition: background-color 5000s ease-in-out 0s; /* ✅ Delay autofill color */
+}
+
+/* SideBar radio input btns style */
+.sidebar-title {
+  font-size: 3rem;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.sidebar-items {
+  margin-top: 20px;
+}
+
+.sidebar-label-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.sidebar-label-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #f8f8f8;
+  border-radius: 50%;
+}
+
+.all {
+  background: linear-gradient(blue, crimson);
+}
+
+.sidebar-label-container:hover input ~ .checkmark {
+  @apply bg-slate-400;
+}
+
+.sidebar-label-container input:checked ~ .checkmark {
+  background-color: #d94125;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.sidebar-label-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.sidebar-label-container .checkmark:after {
+  top: 6px;
+  left: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: white;
+}
+
+.sidebar-label-container .white:after {
+  top: 5px;
+  left: 5px;
+  background-color: black;
+}
+
+.line {
+  margin-top: 3rem;
+  border-color: #f7f7f7;
+}
+
+.color-title {
+  margin-top: 2rem;
 }
