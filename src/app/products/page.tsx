@@ -42,6 +42,8 @@ const ProductsPage = () => {
     setSearchQuery(input); // ✅ Jo likha tha usko as search query store karna
   };
 
+  let filterItems: TypeData[];
+
   // ✅ SearchQuery ka istemal karke filter hoga
   function filterData(
     products: TypeData[],
@@ -50,10 +52,12 @@ const ProductsPage = () => {
   ): JSX.Element[] {
     let filteredData = products;
 
+    filterItems = filteredData.filter(
+      (p) => p.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    );
+
     if (query) {
-      filteredData = filteredData.filter(
-        (p) => p.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
-      );
+      filteredData = filterItems;
     }
 
     if (selected) {
@@ -70,6 +74,7 @@ const ProductsPage = () => {
     return filteredData.map(
       ({ id, img, title, reviews, prevPrice, newPrice }) => (
         <Card
+          titleBgColor={filterItems ? "bg-[#c96f5b]" : ""}
           key={id}
           id={id}
           img={img}

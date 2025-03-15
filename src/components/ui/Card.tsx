@@ -4,13 +4,14 @@ import { TypeData } from "@/db";
 import { useTheme } from "../ThemeChanger/ThemeContext";
 import Link from "next/link";
 
-const Card: React.FC<TypeData> = ({
+const Card: React.FC<TypeData & { titleBgColor?: string }> = ({
   id,
   img,
   title,
   reviews,
   prevPrice,
   newPrice,
+  titleBgColor,
 }) => {
   const { isDarkMode } = useTheme();
 
@@ -31,7 +32,7 @@ const Card: React.FC<TypeData> = ({
       </div>
 
       <div className="">
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h3 className={`${titleBgColor} text-lg font-semibold`}>{title}</h3>
         <div className="flex items-center gap-1 mt-2 text-yellow-400">
           {[...Array(4)].map((_, i) => (
             <AiFillStar key={i} className="text-xl" />
